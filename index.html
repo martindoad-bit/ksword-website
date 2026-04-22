@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSWORD | 凱業株式会社</title>
+<meta name="description" content="凱業株式会社（KSWORD）は日本刀・刃物の製造・輸出を専門とする会社です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Serif+SC:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #8a6f2e;
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --paper-dark: #ede5d4;
+    --steel: #2a2a2a;
+    --mist: #7a7a7a;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Noto Serif JP', 'Noto Serif SC', 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── LANGUAGE CONTROL ── */
+  [data-lang] { display: none; }
+  body.lang-ja [data-lang="ja"] { display: inherit; }
+  body.lang-zh [data-lang="zh"] { display: inherit; }
+  body.lang-en [data-lang="en"] { display: inherit; }
+  body.lang-ja [data-lang="ja"].block,
+  body.lang-zh [data-lang="zh"].block,
+  body.lang-en [data-lang="en"].block { display: block; }
+  body.lang-ja [data-lang="ja"].flex,
+  body.lang-zh [data-lang="zh"].flex,
+  body.lang-en [data-lang="en"].flex { display: flex; }
+  body.lang-ja [data-lang="ja"].grid,
+  body.lang-zh [data-lang="zh"].grid,
+  body.lang-en [data-lang="en"].grid { display: grid; }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.98) 0%, rgba(13,13,13,0.0) 100%);
+    transition: background 0.4s;
+  }
+  header.scrolled {
+    background: rgba(13,13,13,0.97);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+  }
+  .logo-mark {
+    width: 44px; height: 44px;
+    border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    transform: rotate(45deg);
+  }
+  .logo-mark span {
+    transform: rotate(-45deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.05em;
+  }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; letter-spacing: 0.35em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .logo-ja {
+    font-size: 10px; color: var(--mist); letter-spacing: 0.2em;
+    font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  }
+
+  nav { display: flex; align-items: center; gap: 36px; }
+  nav a {
+    color: var(--paper); text-decoration: none;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 12px; letter-spacing: 0.15em; font-weight: 300;
+    transition: color 0.3s;
+    position: relative;
+  }
+  nav a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  nav a:hover { color: var(--gold); }
+  nav a:hover::after { transform: scaleX(1); }
+
+  .lang-switcher {
+    display: flex; gap: 2px;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px; overflow: hidden;
+  }
+  .lang-btn {
+    padding: 6px 12px;
+    background: transparent; border: none; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; letter-spacing: 0.1em;
+    color: var(--mist); transition: all 0.2s;
+  }
+  .lang-btn.active, .lang-btn:hover {
+    background: var(--gold); color: var(--ink); font-weight: 600;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: 100vh; min-height: 700px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(160deg, rgba(13,13,13,0.82) 0%, rgba(13,13,13,0.65) 50%, rgba(13,13,13,0.85) 100%),
+      url('images/store.png') center/cover no-repeat;
+  }
+  .hero-line-v {
+    position: absolute; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 30%, rgba(201,168,76,0.3) 70%, transparent);
+  }
+  .hero-line-v.l1 { left: 15%; }
+  .hero-line-v.l2 { left: 85%; }
+  .hero-line-h {
+    position: absolute; left: 0; right: 0;
+    height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.25) 30%, rgba(201,168,76,0.25) 70%, transparent);
+  }
+  .hero-line-h.h1 { top: 12%; }
+  .hero-line-h.h2 { bottom: 12%; }
+
+  /* Japanese vertical text decoration */
+  .hero-kana {
+    position: absolute; left: 8%; top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 11px; letter-spacing: 0.4em;
+    color: rgba(201,168,76,0.35);
+    font-weight: 300;
+  }
+  .hero-kana-r {
+    position: absolute; right: 8%; top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 0.3em;
+    color: rgba(201,168,76,0.3);
+    font-style: italic;
+  }
+
+  .hero-content {
+    position: relative; text-align: center; z-index: 2;
+    animation: fadeUp 1.2s ease both;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 0.5em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 1s ease 0.3s both;
+  }
+  .hero-title {
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 300; letter-spacing: 0.08em;
+    line-height: 1.1; color: var(--paper);
+    opacity: 0; animation: fadeUp 1s ease 0.5s both;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .hero-tagline {
+    margin-top: 28px;
+    font-size: 13px; letter-spacing: 0.25em;
+    color: var(--mist); font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+    opacity: 0; animation: fadeUp 1s ease 0.7s both;
+  }
+  .hero-cta {
+    margin-top: 52px;
+    opacity: 0; animation: fadeUp 1s ease 0.9s both;
+  }
+  .btn-gold {
+    display: inline-block; padding: 14px 48px;
+    border: 1px solid var(--gold); color: var(--gold);
+    text-decoration: none; font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase;
+    transition: all 0.3s; background: transparent;
+    cursor: pointer;
+  }
+  .btn-gold:hover {
+    background: var(--gold); color: var(--ink);
+  }
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    opacity: 0; animation: fadeIn 1s ease 1.5s both;
+  }
+  .scroll-hint span {
+    font-size: 10px; letter-spacing: 0.3em; color: var(--mist);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 120px 60px; }
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 0.6em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; letter-spacing: 0.06em; line-height: 1.2;
+  }
+  .gold-rule {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 28px 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* ── ABOUT ── */
+  .about-section {
+    background: linear-gradient(135deg, #0f0f0f 0%, #141410 100%);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+    align-items: center;
+  }
+  .about-text p {
+    font-size: 15px; line-height: 2.2; color: rgba(245,240,232,0.8);
+    font-weight: 300; margin-bottom: 20px;
+  }
+  .about-visual {
+    position: relative; aspect-ratio: 3/4; max-height: 500px;
+  }
+  .about-frame {
+    position: absolute; inset: 0;
+    border: 1px solid rgba(201,168,76,0.3);
+    overflow: hidden;
+  }
+  .about-frame img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(20%) contrast(1.05);
+    opacity: 0.85;
+    transition: transform 0.6s ease, opacity 0.4s;
+  }
+  .about-frame:hover img { transform: scale(1.03); opacity: 1; }
+  .about-kanji {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 80px; font-weight: 300;
+    color: rgba(201,168,76,0.25);
+    writing-mode: vertical-rl;
+    letter-spacing: 20px;
+    line-height: 1;
+  }
+  .about-frame-corner {
+    position: absolute; width: 20px; height: 20px;
+    border-color: var(--gold); border-style: solid; border-width: 0;
+  }
+  .about-frame-corner.tl { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+  .about-frame-corner.tr { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
+  .about-frame-corner.bl { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
+  .about-frame-corner.br { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+
+  /* ── BUSINESS ── */
+  .business-section { background: #0d0d0d; }
+  .business-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    margin-top: 60px;
+  }
+  .biz-card {
+    padding: 50px 40px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: all 0.4s; position: relative; overflow: hidden;
+  }
+  .biz-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .biz-card:hover { background: rgba(201,168,76,0.04); }
+  .biz-card:hover::before { transform: scaleX(1); }
+  .biz-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; color: rgba(201,168,76,0.15);
+    line-height: 1; margin-bottom: 24px;
+  }
+  .biz-icon {
+    font-size: 28px; margin-bottom: 20px; display: block;
+  }
+  .biz-title {
+    font-size: 18px; font-weight: 400; letter-spacing: 0.1em;
+    color: var(--paper); margin-bottom: 16px;
+  }
+  .biz-desc {
+    font-size: 13px; line-height: 2; color: var(--mist);
+    font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  }
+
+  /* ── PRODUCTS ── */
+  .products-section { background: #0d0d0d; padding: 100px 60px; }
+  .products-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 60px;
+  }
+  .product-card {
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.15);
+    aspect-ratio: 4/5;
+  }
+  .product-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease; filter: grayscale(15%);
+  }
+  .product-card:hover img { transform: scale(1.06); }
+  .product-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.1) 60%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 28px 24px; transition: background 0.4s;
+  }
+  .product-card:hover .product-card-overlay {
+    background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.3) 60%);
+  }
+  .product-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; letter-spacing: 0.4em; color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .product-card-name {
+    font-size: 16px; font-weight: 300; letter-spacing: 0.1em;
+    color: var(--paper); margin-bottom: 8px;
+  }
+  .product-card-desc {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px; color: var(--mist); line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ── MARKET ── */
+  .market-section {
+    background: linear-gradient(160deg, #0f0f0c 0%, #0d0d0d 100%);
+    border-top: 1px solid rgba(201,168,76,0.12);
+  }
+  .market-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .market-stats { display: flex; flex-direction: column; gap: 30px; margin-top: 50px; }
+  .stat-row {
+    display: flex; align-items: center; gap: 20px;
+    padding-bottom: 24px; border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .stat-flag { font-size: 28px; flex-shrink: 0; }
+  .stat-region {
+    font-size: 14px; color: var(--paper); letter-spacing: 0.1em; flex: 1;
+  }
+  .stat-bar-wrap { flex: 2; position: relative; height: 3px; background: rgba(255,255,255,0.07); }
+  .stat-bar { height: 100%; background: linear-gradient(to right, var(--gold-dim), var(--gold)); }
+  .stat-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--gold); flex-shrink: 0; min-width: 50px; text-align: right;
+  }
+  .market-map-box {
+    position: relative; padding: 40px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.02);
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .map-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase;
+  }
+  .globe-art {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+  }
+  .globe-item {
+    text-align: center; padding: 24px 16px;
+    border: 1px solid rgba(201,168,76,0.12);
+    background: rgba(255,255,255,0.02);
+  }
+  .globe-flag { font-size: 32px; margin-bottom: 10px; }
+  .globe-name {
+    font-size: 11px; letter-spacing: 0.15em; color: var(--mist);
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  /* ── COMPANY INFO TABLE ── */
+  .info-section {
+    background: #0a0a0a;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .info-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .info-table { margin-top: 50px; width: 100%; border-collapse: collapse; }
+  .info-table tr {
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .info-table th {
+    padding: 20px 24px 20px 0;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 12px;
+    font-weight: 300; letter-spacing: 0.15em;
+    color: var(--gold); text-align: left; vertical-align: top;
+    white-space: nowrap; width: 120px;
+  }
+  .info-table td {
+    padding: 20px 0;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 13px;
+    color: rgba(245,240,232,0.8); line-height: 1.8; font-weight: 300;
+  }
+  .info-aside {
+    margin-top: 50px;
+    display: flex; flex-direction: column; gap: 30px;
+  }
+  .info-card {
+    padding: 32px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 100%);
+  }
+  .info-card-title {
+    font-size: 11px; letter-spacing: 0.4em; color: var(--gold);
+    text-transform: uppercase; font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 16px;
+  }
+  .info-card-body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px; color: rgba(245,240,232,0.75); line-height: 1.9; font-weight: 300;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: linear-gradient(160deg, #0d0d0d 0%, #0f0f0c 100%);
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-links { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 24px; border: 1px solid rgba(201,168,76,0.15);
+    transition: border-color 0.3s;
+  }
+  .contact-item:hover { border-color: rgba(201,168,76,0.4); }
+  .contact-item-icon { color: var(--gold); font-size: 18px; margin-top: 2px; }
+  .contact-item-label {
+    font-size: 10px; letter-spacing: 0.3em; color: var(--mist);
+    font-family: 'Cormorant Garamond', serif; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .contact-item-val {
+    font-size: 14px; color: var(--paper);
+    font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
+  }
+  .contact-item-val a { color: var(--gold); text-decoration: none; }
+  .contact-form { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label {
+    font-size: 11px; letter-spacing: 0.2em; color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .form-input, .form-textarea {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2);
+    color: var(--paper); padding: 14px 18px;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 13px; font-weight: 300;
+    outline: none; transition: border-color 0.3s; resize: none;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: rgba(201,168,76,0.6); }
+  .form-textarea { height: 120px; }
+  .btn-submit {
+    padding: 16px 40px; border: 1px solid var(--gold);
+    background: transparent; color: var(--gold); cursor: pointer;
+    font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.3em;
+    text-transform: uppercase; transition: all 0.3s; align-self: flex-start;
+  }
+  .btn-submit:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #070707;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 50px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; letter-spacing: 0.3em; color: var(--gold);
+  }
+  .footer-copy {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px; color: var(--mist); letter-spacing: 0.1em; font-weight: 300;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px; color: var(--mist); text-decoration: none;
+    letter-spacing: 0.1em; font-weight: 300; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── DIVIDER ── */
+  .ornament {
+    display: flex; align-items: center; gap: 20px; margin: 20px 0;
+  }
+  .ornament-line { flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
+  .ornament-diamond {
+    width: 6px; height: 6px;
+    border: 1px solid var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    header { padding: 16px 24px; }
+    nav { display: none; }
+    section { padding: 80px 24px; }
+    .about-grid, .market-inner, .info-inner, .contact-inner { grid-template-columns: 1fr; gap: 50px; }
+    .business-grid { grid-template-columns: 1fr; gap: 2px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body class="lang-ja">
+
+<!-- ══ HEADER ══ -->
+<header id="header">
+  <a href="#" class="logo">
+    <div class="logo-mark"><span>K</span></div>
+    <div class="logo-text">
+      <span class="logo-en">KSWORD</span>
+      <span class="logo-ja">凱業株式会社</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#about" data-lang="ja">会社概要</a>
+    <a href="#about" data-lang="zh">关于我们</a>
+    <a href="#about" data-lang="en">About</a>
+
+    <a href="#business" data-lang="ja">事業内容</a>
+    <a href="#business" data-lang="zh">业务范围</a>
+    <a href="#business" data-lang="en">Business</a>
+
+    <a href="#market" data-lang="ja">市場</a>
+    <a href="#market" data-lang="zh">市场</a>
+    <a href="#market" data-lang="en">Market</a>
+
+    <a href="#company" data-lang="ja">会社情報</a>
+    <a href="#company" data-lang="zh">公司信息</a>
+    <a href="#company" data-lang="en">Company</a>
+
+    <a href="#contact" data-lang="ja">お問い合わせ</a>
+    <a href="#contact" data-lang="zh">联系我们</a>
+    <a href="#contact" data-lang="en">Contact</a>
+  </nav>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ja')">JA</button>
+    <button class="lang-btn" onclick="setLang('zh')">ZH</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line-v l1"></div>
+  <div class="hero-line-v l2"></div>
+  <div class="hero-line-h h1"></div>
+  <div class="hero-line-h h2"></div>
+  <div class="hero-kana">刃物の伝統　世界へ</div>
+  <div class="hero-kana-r">Tradition · Craftsmanship · Global</div>
+  <div class="hero-content">
+    <p class="hero-sub" data-lang="ja">日本刀・刃物の製造・輸出</p>
+    <p class="hero-sub" data-lang="zh">日本刀具制造与出口</p>
+    <p class="hero-sub" data-lang="en">Japanese Blade Manufacturing & Export</p>
+
+    <h1 class="hero-title" data-lang="ja"><em>KSWORD</em><br>凱業株式会社</h1>
+    <h1 class="hero-title" data-lang="zh"><em>KSWORD</em><br>凯业株式会社</h1>
+    <h1 class="hero-title" data-lang="en"><em>KSWORD</em><br>Kaigyou Co., Ltd.</h1>
+
+    <p class="hero-tagline" data-lang="ja">日本の伝統技術を、世界の食卓へ</p>
+    <p class="hero-tagline" data-lang="zh">将日本传统技艺，带向世界餐桌</p>
+    <p class="hero-tagline" data-lang="en">Bringing Japanese craftsmanship to tables worldwide</p>
+
+    <div class="hero-cta">
+      <a href="#about" class="btn-gold" data-lang="ja">詳しく見る</a>
+      <a href="#about" class="btn-gold" data-lang="zh">了解更多</a>
+      <a href="#about" class="btn-gold" data-lang="en">Discover More</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-frame">
+          <img src="images/tsuba-brown.png" alt="Japanese blade craftsmanship - 凱業美術">
+          <div class="about-frame-corner tl"></div>
+          <div class="about-frame-corner tr"></div>
+          <div class="about-frame-corner bl"></div>
+          <div class="about-frame-corner br"></div>
+        </div>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:0.4em; color:rgba(201,168,76,0.4); text-transform:uppercase;">Craftsmanship Since Tradition</p>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <!-- JA -->
+        <p class="section-label" data-lang="ja">About Us</p>
+        <h2 class="section-title" data-lang="ja">会社概要</h2>
+        <div class="gold-rule"></div>
+        <p data-lang="ja">凱業株式会社（英文名：KSWORD）は、日本刀・調理用刃物の製造・輸出を専門とする企業です。日本国内での豊富な実績を基に、中国・欧米市場への輸出事業を展開しております。</p>
+        <p data-lang="ja">当社は、日本伝統の職人技術と現代の品質管理を融合させ、世界中のお客様に最高品質の刃物製品をお届けすることをミッションとしています。</p>
+        <p data-lang="ja">関連会社として中国国内でも同様の事業を展開しており（国内サイト：<span style="color:var(--gold)">www.k-sword.com</span>）、グローバルネットワークを通じたサービス提供を実現しています。</p>
+        <!-- ZH -->
+        <p class="section-label" data-lang="zh">About Us</p>
+        <h2 class="section-title" data-lang="zh">关于我们</h2>
+        <div class="gold-rule" data-lang="zh"></div>
+        <p data-lang="zh">凯业株式会社（英文名：KSWORD）是一家专注于日本刀具制造与出口的企业，总部设于日本。基于在中国市场的丰富经验，我们积极拓展面向中国及欧美市场的出口业务。</p>
+        <p data-lang="zh">公司融合日本传统工艺与现代品质管理体系，致力于向全球客户提供最高品质的刀具产品。</p>
+        <p data-lang="zh">我们在中国设有关联公司（国内官网：<span style="color:var(--gold)">www.k-sword.com</span>），通过全球化网络为客户提供优质服务。</p>
+        <!-- EN -->
+        <p class="section-label" data-lang="en">About Us</p>
+        <h2 class="section-title" data-lang="en">About KSWORD</h2>
+        <div class="gold-rule" data-lang="en"></div>
+        <p data-lang="en">KSWORD (Kaigyou Co., Ltd.) is a Japan-based company specializing in the manufacturing and export of Japanese blades and cutlery. Drawing on extensive experience in both domestic and international markets, we serve customers across China, Europe, and the Americas.</p>
+        <p data-lang="en">Our mission is to deliver the finest quality blade products by combining Japan's traditional craftsmanship with modern quality management standards.</p>
+        <p data-lang="en">Our affiliated company in China (<span style="color:var(--gold)">www.k-sword.com</span>) extends our global network, ensuring seamless service to our clients worldwide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BUSINESS ══ -->
+<section class="business-section" id="business">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label" data-lang="ja">Our Business</p>
+      <p class="section-label" data-lang="zh">Our Business</p>
+      <p class="section-label" data-lang="en">Our Business</p>
+      <h2 class="section-title" data-lang="ja">事業内容</h2>
+      <h2 class="section-title" data-lang="zh">业务范围</h2>
+      <h2 class="section-title" data-lang="en">What We Do</h2>
+    </div>
+    <div class="business-grid">
+      <div class="biz-card reveal">
+        <div class="biz-num">01</div>
+        <span class="biz-icon">⚔</span>
+        <div class="biz-title" data-lang="ja">日本刀・刃物の製造</div>
+        <div class="biz-title" data-lang="zh">日本刀具制造</div>
+        <div class="biz-title" data-lang="en">Blade Manufacturing</div>
+        <div class="biz-desc" data-lang="ja">伝統的な製法による日本刀・包丁・各種刃物の製造。職人による手仕上げと最新の品質管理を組み合わせた高品質製品を提供します。</div>
+        <div class="biz-desc" data-lang="zh">采用传统工艺制造日本刀、厨刀及各类刃物，融合匠人手工精制与现代品质管控，提供高品质产品。</div>
+        <div class="biz-desc" data-lang="en">Manufacturing of Japanese swords, kitchen knives, and specialty blades using traditional techniques combined with modern quality control systems.</div>
+      </div>
+      <div class="biz-card reveal">
+        <div class="biz-num">02</div>
+        <span class="biz-icon">🌏</span>
+        <div class="biz-title" data-lang="ja">海外輸出事業</div>
+        <div class="biz-title" data-lang="zh">海外出口业务</div>
+        <div class="biz-title" data-lang="en">International Export</div>
+        <div class="biz-desc" data-lang="ja">中国・欧米を主要市場として、日本製刃物の輸出を行います。各国の輸入規制・法令に対応したコンプライアンス体制を整備しています。</div>
+        <div class="biz-desc" data-lang="zh">以中国、欧洲及美洲为主要市场，开展日本刀具出口业务，并建立完善的合规体系，符合各目标市场法规要求。</div>
+        <div class="biz-desc" data-lang="en">Export operations focused on China, Europe, and the Americas, with full compliance frameworks established for each target market's import regulations.</div>
+      </div>
+      <div class="biz-card reveal">
+        <div class="biz-num">03</div>
+        <span class="biz-icon">🤝</span>
+        <div class="biz-title" data-lang="ja">OEM・卸売事業</div>
+        <div class="biz-title" data-lang="zh">OEM及批发业务</div>
+        <div class="biz-title" data-lang="en">OEM & Wholesale</div>
+        <div class="biz-desc" data-lang="ja">海外バイヤー・ブランド向けにOEM製造・卸売サービスを提供します。ブランドロゴ入り製品や特注仕様への対応も可能です。</div>
+        <div class="biz-desc" data-lang="zh">面向海外买家及品牌提供OEM代工及批发服务，支持品牌定制刻印及特殊规格订制。</div>
+        <div class="biz-desc" data-lang="en">OEM manufacturing and wholesale services for international buyers and brands, including custom branding and special specifications.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTS ══ -->
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label" data-lang="ja">Products</p>
+      <p class="section-label" data-lang="zh">Products</p>
+      <p class="section-label" data-lang="en">Products</p>
+      <h2 class="section-title" data-lang="ja">製品ラインナップ</h2>
+      <h2 class="section-title" data-lang="zh">产品系列</h2>
+      <h2 class="section-title" data-lang="en">Our Products</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <img src="images/katana-display.png" alt="日置山城守源一法 - KSWORD">
+        <div class="product-card-overlay">
+          <div class="product-card-num">01</div>
+          <div class="product-card-name" data-lang="ja">日本刀・刀剣</div>
+          <div class="product-card-name" data-lang="zh">日本刀・刀剑</div>
+          <div class="product-card-name" data-lang="en">Katana & Swords</div>
+          <div class="product-card-desc" data-lang="ja">伝統製法による本格日本刀</div>
+          <div class="product-card-desc" data-lang="zh">采用传统工艺制作的正宗日本刀</div>
+          <div class="product-card-desc" data-lang="en">Authentic blades by traditional craft</div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <img src="images/katana-pair.png" alt="日本刀 二振り - KSWORD">
+        <div class="product-card-overlay">
+          <div class="product-card-num">02</div>
+          <div class="product-card-name" data-lang="ja">太刀・打刀</div>
+          <div class="product-card-name" data-lang="zh">太刀·打刀</div>
+          <div class="product-card-name" data-lang="en">Tachi & Uchigatana</div>
+          <div class="product-card-desc" data-lang="ja">各流派に対応した刀剣コレクション</div>
+          <div class="product-card-desc" data-lang="zh">对应各流派的刀剑典藏系列</div>
+          <div class="product-card-desc" data-lang="en">Curated collection across sword traditions</div>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <img src="images/tsuba-blue.png" alt="鍔・刀装具 - KSWORD">
+        <div class="product-card-overlay">
+          <div class="product-card-num">03</div>
+          <div class="product-card-name" data-lang="ja">鍔・刀装具</div>
+          <div class="product-card-name" data-lang="zh">鍔·刀装具</div>
+          <div class="product-card-name" data-lang="en">Tsuba & Fittings</div>
+          <div class="product-card-desc" data-lang="ja">匠の技が光る鍔・各種刀装具</div>
+          <div class="product-card-desc" data-lang="zh">彰显匠心工艺的鍔及各式刀装具</div>
+          <div class="product-card-desc" data-lang="en">Artisan-crafted guards and sword fittings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARKET ══ -->
+<section class="market-section" id="market">
+  <div class="container">
+    <div class="market-inner">
+      <div class="reveal">
+        <p class="section-label" data-lang="ja">Global Reach</p>
+        <p class="section-label" data-lang="zh">Global Reach</p>
+        <p class="section-label" data-lang="en">Global Reach</p>
+        <h2 class="section-title" data-lang="ja">主要輸出市場</h2>
+        <h2 class="section-title" data-lang="zh">主要出口市场</h2>
+        <h2 class="section-title" data-lang="en">Key Export Markets</h2>
+        <div class="gold-rule"></div>
+        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="ja">日本国内のネットワークを基盤に、中国・欧州・北米へのグローバル展開を積極推進しています。</p>
+        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="zh">依托日本国内网络，积极推进面向中国、欧洲及北美的全球化布局。</p>
+        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="en">Leveraging our domestic Japanese network, we actively expand our global footprint across China, Europe, and North America.</p>
+        <div class="market-stats">
+          <div class="stat-row">
+            <span class="stat-flag">🇯🇵</span>
+            <span class="stat-region" data-lang="ja">日本（国内）</span>
+            <span class="stat-region" data-lang="zh">日本（国内）</span>
+            <span class="stat-region" data-lang="en">Japan (Domestic)</span>
+            <div class="stat-bar-wrap"><div class="stat-bar" style="width:85%"></div></div>
+            <span class="stat-pct">85%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-flag">🇨🇳</span>
+            <span class="stat-region" data-lang="ja">中国</span>
+            <span class="stat-region" data-lang="zh">中国</span>
+            <span class="stat-region" data-lang="en">China</span>
+            <div class="stat-bar-wrap"><div class="stat-bar" style="width:70%"></div></div>
+            <span class="stat-pct">70%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-flag">🇪🇺</span>
+            <span class="stat-region" data-lang="ja">欧州</span>
+            <span class="stat-region" data-lang="zh">欧洲</span>
+            <span class="stat-region" data-lang="en">Europe</span>
+            <div class="stat-bar-wrap"><div class="stat-bar" style="width:55%"></div></div>
+            <span class="stat-pct">55%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-flag">🇺🇸</span>
+            <span class="stat-region" data-lang="ja">北米</span>
+            <span class="stat-region" data-lang="zh">北美</span>
+            <span class="stat-region" data-lang="en">North America</span>
+            <div class="stat-bar-wrap"><div class="stat-bar" style="width:45%"></div></div>
+            <span class="stat-pct">45%</span>
+          </div>
+        </div>
+      </div>
+      <div class="market-map-box reveal">
+        <p class="map-title" data-lang="ja">グローバルネットワーク</p>
+        <p class="map-title" data-lang="zh">全球业务网络</p>
+        <p class="map-title" data-lang="en">Global Network</p>
+        <div class="globe-art">
+          <div class="globe-item">
+            <div class="globe-flag">🇯🇵</div>
+            <div class="globe-name" data-lang="ja">日本<br>本社</div>
+            <div class="globe-name" data-lang="zh">日本<br>总部</div>
+            <div class="globe-name" data-lang="en">Japan<br>HQ</div>
+          </div>
+          <div class="globe-item">
+            <div class="globe-flag">🇨🇳</div>
+            <div class="globe-name" data-lang="ja">中国<br>関連会社</div>
+            <div class="globe-name" data-lang="zh">中国<br>关联公司</div>
+            <div class="globe-name" data-lang="en">China<br>Affiliate</div>
+          </div>
+          <div class="globe-item">
+            <div class="globe-flag">🌍</div>
+            <div class="globe-name" data-lang="ja">欧米<br>輸出先</div>
+            <div class="globe-name" data-lang="zh">欧美<br>出口目的地</div>
+            <div class="globe-name" data-lang="en">Europe<br>& Americas</div>
+          </div>
+        </div>
+        <div style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(201,168,76,0.15);">
+          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="ja">中国国内サイト：<a href="http://www.k-sword.com" style="color:var(--gold); text-decoration:none;" target="_blank">www.k-sword.com</a></p>
+          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="zh">中国国内官网：<a href="http://www.k-sword.com" style="color:var(--gold); text-decoration:none;" target="_blank">www.k-sword.com</a></p>
+          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="en">China Affiliate Site: <a href="http://www.k-sword.com" style="color:var(--gold); text-decoration:none;" target="_blank">www.k-sword.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMPANY INFO ══ -->
+<section class="info-section" id="company">
+  <div class="container">
+    <div class="info-inner">
+      <div class="reveal">
+        <p class="section-label" data-lang="ja">Company Profile</p>
+        <p class="section-label" data-lang="zh">Company Profile</p>
+        <p class="section-label" data-lang="en">Company Profile</p>
+        <h2 class="section-title" data-lang="ja">会社情報</h2>
+        <h2 class="section-title" data-lang="zh">公司信息</h2>
+        <h2 class="section-title" data-lang="en">Company Information</h2>
+
+        <!-- JA Table -->
+        <table class="info-table" data-lang="ja">
+          <tr><th>会社名</th><td>凱業株式会社</td></tr>
+          <tr><th>英文名</th><td>KSWORD Co., Ltd.</td></tr>
+          <tr><th>設立</th><td>2025年9月4日（令和7年9月4日）</td></tr>
+          <tr><th>所在地</th><td>大阪府大阪市東淀川区大桐三丁目10番18号－303号</td></tr>
+          <tr><th>代表者</th><td>戴娴婷</td></tr>
+          <tr><th>資本金</th><td>金500万円</td></tr>
+          <tr><th>事業内容</th><td>日本刀・刃物の製造、販売及び輸出入</td></tr>
+          <tr><th>取引銀行</th><td>GMOあおぞらネット銀行 他</td></tr>
+          <tr><th>国内関連</th><td>www.k-sword.com（中国）</td></tr>
+        </table>
+
+        <!-- ZH Table -->
+        <table class="info-table" data-lang="zh">
+          <tr><th>公司名称</th><td>凯业株式会社</td></tr>
+          <tr><th>英文名称</th><td>KSWORD Co., Ltd.</td></tr>
+          <tr><th>成立时间</th><td>2025年9月4日（令和7年9月4日）</td></tr>
+          <tr><th>地址</th><td>大阪府大阪市东淀川区大桐三丁目10番18号－303号</td></tr>
+          <tr><th>代表人</th><td>戴娴婷</td></tr>
+          <tr><th>注册资本</th><td>500万日元</td></tr>
+          <tr><th>主营业务</th><td>日本刀具的制造、销售及进出口</td></tr>
+          <tr><th>开户银行</th><td>GMO青空网络银行 等</td></tr>
+          <tr><th>关联公司</th><td>www.k-sword.com（中国）</td></tr>
+        </table>
+
+        <!-- EN Table -->
+        <table class="info-table" data-lang="en">
+          <tr><th>Company</th><td>Kaigyou Co., Ltd. (KSWORD)</td></tr>
+          <tr><th>English Name</th><td>KSWORD Co., Ltd.</td></tr>
+          <tr><th>Founded</th><td>September 4, 2025</td></tr>
+          <tr><th>Address</th><td>303, 10-18 Okigiri 3-chome, Higashiyodogawa-ku, Osaka</td></tr>
+          <tr><th>CEO</th><td>Dai Xianting</td></tr>
+          <tr><th>Capital</th><td>JPY 5,000,000</td></tr>
+          <tr><th>Business</th><td>Manufacturing, sales, import/export of Japanese blades & cutlery</td></tr>
+          <tr><th>Bank</th><td>GMO Aozora Net Bank, et al.</td></tr>
+          <tr><th>Affiliate</th><td>www.k-sword.com (China)</td></tr>
+        </table>
+      </div>
+
+      <div class="info-aside reveal">
+        <div class="info-card">
+          <div class="info-card-title" data-lang="ja">品質へのこだわり</div>
+          <div class="info-card-title" data-lang="zh">品质承诺</div>
+          <div class="info-card-title" data-lang="en">Quality Commitment</div>
+          <div class="info-card-body" data-lang="ja">当社は原材料の選定から最終検査まで、すべての工程において厳格な品質基準を設けています。日本伝統の刃物文化を継承しながら、国際基準に対応した製品を提供しています。</div>
+          <div class="info-card-body" data-lang="zh">从原材料筛选到最终检验，公司在每道工序均设有严格的品质标准。在传承日本传统刀具文化的同时，提供符合国际标准的高品质产品。</div>
+          <div class="info-card-body" data-lang="en">From raw material selection to final inspection, we maintain rigorous quality standards at every stage of production, delivering products that meet international quality benchmarks.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title" data-lang="ja">コンプライアンス</div>
+          <div class="info-card-title" data-lang="zh">合规经营</div>
+          <div class="info-card-title" data-lang="en">Compliance</div>
+          <div class="info-card-body" data-lang="ja">日本国内法令はもとより、輸出先国の関係法令・規制を遵守した適正な事業運営を行っています。刃物類の輸出に関する国際規制への対応も徹底しています。</div>
+          <div class="info-card-body" data-lang="zh">公司严格遵守日本国内法律法规及出口目的国的相关法规，合法合规开展业务，切实落实刀具类产品出口的国际规制要求。</div>
+          <div class="info-card-body" data-lang="en">We strictly comply with Japanese domestic laws and the regulations of our export markets, with thorough adherence to international regulations governing blade exports.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title" data-lang="ja">グローバルビジョン</div>
+          <div class="info-card-title" data-lang="zh">全球化愿景</div>
+          <div class="info-card-title" data-lang="en">Global Vision</div>
+          <div class="info-card-body" data-lang="ja">「日本の刃物文化を世界へ」をビジョンに掲げ、高品質な日本製刃物を通じて、世界中の食文化・伝統文化に貢献してまいります。</div>
+          <div class="info-card-body" data-lang="zh">以"将日本刀具文化带向世界"为愿景，通过高品质日本刀具，为全球饮食文化与传统文化作出贡献。</div>
+          <div class="info-card-body" data-lang="en">Our vision is to bring Japanese blade culture to the world — contributing to global culinary and traditional culture through premium Japanese craftsmanship.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="reveal">
+        <p class="section-label" data-lang="ja">Contact</p>
+        <p class="section-label" data-lang="zh">Contact</p>
+        <p class="section-label" data-lang="en">Contact</p>
+        <h2 class="section-title" data-lang="ja">お問い合わせ</h2>
+        <h2 class="section-title" data-lang="zh">联系我们</h2>
+        <h2 class="section-title" data-lang="en">Get In Touch</h2>
+        <div class="gold-rule"></div>
+        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="ja">製品に関するお問い合わせ、OEM・卸売のご相談、その他ご質問はお気軽にご連絡ください。</p>
+        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="zh">如有产品咨询、OEM及批发合作意向，或其他问题，欢迎随时联系我们。</p>
+        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="en">Feel free to contact us for product inquiries, OEM and wholesale partnerships, or any other questions.</p>
+        <div class="contact-links">
+          <div class="contact-item">
+            <span class="contact-item-icon">✉</span>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val"><a href="mailto:info@ksword.co.jp">info@ksword.co.jp</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">🌐</span>
+            <div>
+              <div class="contact-item-label" data-lang="ja">中国国内サイト</div>
+              <div class="contact-item-label" data-lang="zh">中国国内官网</div>
+              <div class="contact-item-label" data-lang="en">China Affiliate</div>
+              <div class="contact-item-val"><a href="http://www.k-sword.com" target="_blank">www.k-sword.com</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-icon">📍</span>
+            <div>
+              <div class="contact-item-label" data-lang="ja">所在地</div>
+              <div class="contact-item-label" data-lang="zh">地址</div>
+              <div class="contact-item-label" data-lang="en">Address</div>
+              <div class="contact-item-val" data-lang="ja">大阪府大阪市東淀川区大桐三丁目10番18号－303号</div>
+              <div class="contact-item-val" data-lang="zh">大阪府大阪市东淀川区大桐三丁目10番18号－303号</div>
+              <div class="contact-item-val" data-lang="en">303, 10-18 Okigiri 3-chome, Higashiyodogawa-ku, Osaka</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="section-label" style="visibility:hidden;">spacer</p>
+        <h2 class="section-title" data-lang="ja">メッセージを送る</h2>
+        <h2 class="section-title" data-lang="zh">发送消息</h2>
+        <h2 class="section-title" data-lang="en">Send a Message</h2>
+        <div class="contact-form">
+          <div class="form-group">
+            <label class="form-label" data-lang="ja">お名前</label>
+            <label class="form-label" data-lang="zh">姓名</label>
+            <label class="form-label" data-lang="en">Name</label>
+            <input class="form-input" type="text">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang="ja">メールアドレス</label>
+            <label class="form-label" data-lang="zh">电子邮箱</label>
+            <label class="form-label" data-lang="en">Email</label>
+            <input class="form-input" type="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang="ja">件名</label>
+            <label class="form-label" data-lang="zh">主题</label>
+            <label class="form-label" data-lang="en">Subject</label>
+            <input class="form-input" type="text">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang="ja">メッセージ</label>
+            <label class="form-label" data-lang="zh">消息内容</label>
+            <label class="form-label" data-lang="en">Message</label>
+            <textarea class="form-textarea"></textarea>
+          </div>
+          <button class="btn-submit" data-lang="ja">送信する</button>
+          <button class="btn-submit" data-lang="zh">发送</button>
+          <button class="btn-submit" data-lang="en">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">KSWORD</div>
+  <div class="footer-copy">
+    <span data-lang="ja">© 2025 凱業株式会社 All Rights Reserved.</span>
+    <span data-lang="zh">© 2025 凯业株式会社 版权所有</span>
+    <span data-lang="en">© 2025 Kaigyou Co., Ltd. (KSWORD) All Rights Reserved.</span>
+  </div>
+  <div class="footer-links">
+    <a href="#about" data-lang="ja">会社概要</a>
+    <a href="#about" data-lang="zh">关于我们</a>
+    <a href="#about" data-lang="en">About</a>
+    <a href="#business" data-lang="ja">事業内容</a>
+    <a href="#business" data-lang="zh">业务</a>
+    <a href="#business" data-lang="en">Business</a>
+    <a href="#contact" data-lang="ja">お問い合わせ</a>
+    <a href="#contact" data-lang="zh">联系</a>
+    <a href="#contact" data-lang="en">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Language switcher
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', ['ja','zh','en'][i] === lang);
+    });
+    localStorage.setItem('ksword-lang', lang);
+  }
+
+  // Restore language preference
+  const saved = localStorage.getItem('ksword-lang');
+  if (saved) setLang(saved);
+
+  // Sticky header
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
