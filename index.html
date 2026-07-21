@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KSWORD | 凱業株式会社</title>
-<meta name="description" content="凱業株式会社（KSWORD）は日本刀・刃物の製造・輸出を専門とする会社です。">
+<meta name="description" content="凱業株式会社（KSWORD）は大阪を拠点に、日本刀・刀剣類、鍔・刀装具、刃物類を取り扱う会社です。古物商許可：大阪府公安委員会 第62116R083691号。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Serif+SC:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Noto+Sans+JP:wght@300;400&amp;display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #c9a84c;
@@ -28,24 +28,22 @@
   body {
     background: var(--ink);
     color: var(--paper);
-    font-family: 'Noto Serif JP', 'Noto Serif SC', 'Cormorant Garamond', serif;
+    font-family: 'Noto Serif JP', 'Cormorant Garamond', serif;
     overflow-x: hidden;
   }
 
   /* ── LANGUAGE CONTROL ── */
-  [data-lang] { display: none; }
-  body.lang-ja [data-lang="ja"] { display: inherit; }
-  body.lang-zh [data-lang="zh"] { display: inherit; }
-  body.lang-en [data-lang="en"] { display: inherit; }
+  [data-lang] { display: none !important; }
+  body.lang-ja [data-lang="ja"] { display: revert !important; }
+  body.lang-en [data-lang="en"] { display: revert !important; }
   body.lang-ja [data-lang="ja"].block,
-  body.lang-zh [data-lang="zh"].block,
-  body.lang-en [data-lang="en"].block { display: block; }
+  body.lang-en [data-lang="en"].block { display: block !important; }
   body.lang-ja [data-lang="ja"].flex,
-  body.lang-zh [data-lang="zh"].flex,
-  body.lang-en [data-lang="en"].flex { display: flex; }
+  body.lang-en [data-lang="en"].flex { display: flex !important; }
   body.lang-ja [data-lang="ja"].grid,
-  body.lang-zh [data-lang="zh"].grid,
-  body.lang-en [data-lang="en"].grid { display: grid; }
+  body.lang-en [data-lang="en"].grid { display: grid !important; }
+  body.lang-ja .permit-badge[data-lang="ja"],
+  body.lang-en .permit-badge[data-lang="en"] { display: inline-flex !important; }
 
   /* ── HEADER ── */
   header {
@@ -190,8 +188,21 @@
     color: var(--mist); font-family: 'Noto Sans JP', sans-serif; font-weight: 300;
     opacity: 0; animation: fadeUp 1s ease 0.7s both;
   }
+  .permit-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-top: 24px; padding: 10px 18px;
+    border: 1px solid rgba(201,168,76,0.55);
+    background: rgba(13,13,13,0.72);
+    color: var(--paper); font-family: 'Noto Sans JP', sans-serif;
+    font-size: 12px; letter-spacing: 0.08em; line-height: 1.6;
+    opacity: 0; animation: fadeUp 1s ease 0.85s both;
+  }
+  .permit-badge::before {
+    content: '許可'; color: var(--ink); background: var(--gold);
+    padding: 2px 7px; font-size: 10px; letter-spacing: 0.12em;
+  }
   .hero-cta {
-    margin-top: 52px;
+    margin-top: 34px;
     opacity: 0; animation: fadeUp 1s ease 0.9s both;
   }
   .btn-gold {
@@ -505,6 +516,7 @@
     font-size: 20px; letter-spacing: 0.3em; color: var(--gold);
   }
   .footer-copy {
+    display: flex; flex-direction: column; gap: 8px; text-align: center;
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 11px; color: var(--mist); letter-spacing: 0.1em; font-weight: 300;
   }
@@ -554,6 +566,13 @@
     .business-grid { grid-template-columns: 1fr; gap: 2px; }
     footer { flex-direction: column; gap: 20px; text-align: center; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
+    .permit-badge { max-width: calc(100vw - 40px); justify-content: center; }
+    .market-inner > * { min-width: 0; }
+    .stat-row { grid-template-columns: 30px minmax(0, 1fr); }
+    .stat-bar-wrap { display: none; }
+    .market-map-box { padding: 30px 24px; }
+    .globe-art { grid-template-columns: 1fr; gap: 16px; }
+    .globe-item { width: 100%; }
   }
 </style>
 </head>
@@ -570,28 +589,22 @@
   </a>
   <nav>
     <a href="#about" data-lang="ja">会社概要</a>
-    <a href="#about" data-lang="zh">关于我们</a>
     <a href="#about" data-lang="en">About</a>
 
     <a href="#business" data-lang="ja">事業内容</a>
-    <a href="#business" data-lang="zh">业务范围</a>
     <a href="#business" data-lang="en">Business</a>
 
-    <a href="#market" data-lang="ja">市場</a>
-    <a href="#market" data-lang="zh">市场</a>
-    <a href="#market" data-lang="en">Market</a>
+    <a href="#market" data-lang="ja">安心への取組み</a>
+    <a href="#market" data-lang="en">Our Standards</a>
 
     <a href="#company" data-lang="ja">会社情報</a>
-    <a href="#company" data-lang="zh">公司信息</a>
     <a href="#company" data-lang="en">Company</a>
 
     <a href="#contact" data-lang="ja">お問い合わせ</a>
-    <a href="#contact" data-lang="zh">联系我们</a>
     <a href="#contact" data-lang="en">Contact</a>
   </nav>
   <div class="lang-switcher">
     <button class="lang-btn active" onclick="setLang('ja')">JA</button>
-    <button class="lang-btn" onclick="setLang('zh')">ZH</button>
     <button class="lang-btn" onclick="setLang('en')">EN</button>
   </div>
 </header>
@@ -603,24 +616,23 @@
   <div class="hero-line-v l2"></div>
   <div class="hero-line-h h1"></div>
   <div class="hero-line-h h2"></div>
-  <div class="hero-kana">刃物の伝統　世界へ</div>
-  <div class="hero-kana-r">Tradition · Craftsmanship · Global</div>
+  <div class="hero-kana">大阪から、誠実な刀剣取引を</div>
+  <div class="hero-kana-r">Osaka · Craftsmanship · Trust</div>
   <div class="hero-content">
-    <p class="hero-sub" data-lang="ja">日本刀・刃物の製造・輸出</p>
-    <p class="hero-sub" data-lang="zh">日本刀具制造与出口</p>
-    <p class="hero-sub" data-lang="en">Japanese Blade Manufacturing & Export</p>
+    <p class="hero-sub" data-lang="ja">日本刀・刀剣類・刀装具の取扱い</p>
+    <p class="hero-sub" data-lang="en">Japanese Swords, Fittings &amp; Cutlery</p>
 
     <h1 class="hero-title" data-lang="ja"><em>KSWORD</em><br>凱業株式会社</h1>
-    <h1 class="hero-title" data-lang="zh"><em>KSWORD</em><br>凯业株式会社</h1>
     <h1 class="hero-title" data-lang="en"><em>KSWORD</em><br>Kaigyou Co., Ltd.</h1>
 
-    <p class="hero-tagline" data-lang="ja">日本の伝統技術を、世界の食卓へ</p>
-    <p class="hero-tagline" data-lang="zh">将日本传统技艺，带向世界餐桌</p>
-    <p class="hero-tagline" data-lang="en">Bringing Japanese craftsmanship to tables worldwide</p>
+    <p class="hero-tagline" data-lang="ja">品物の背景を大切に、誠実で丁寧な取引を</p>
+    <p class="hero-tagline" data-lang="en">Respecting provenance through careful, responsible trade</p>
+
+    <div class="permit-badge" data-lang="ja">古物商許可　大阪府公安委員会　第62116R083691号</div>
+    <div class="permit-badge" data-lang="en">Secondhand Dealer License: Osaka Prefectural Public Safety Commission No. 62116R083691</div>
 
     <div class="hero-cta">
       <a href="#about" class="btn-gold" data-lang="ja">詳しく見る</a>
-      <a href="#about" class="btn-gold" data-lang="zh">了解更多</a>
       <a href="#about" class="btn-gold" data-lang="en">Discover More</a>
     </div>
   </div>
@@ -642,31 +654,23 @@
           <div class="about-frame-corner bl"></div>
           <div class="about-frame-corner br"></div>
         </div>
-          <p style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:0.4em; color:rgba(201,168,76,0.4); text-transform:uppercase;">Craftsmanship Since Tradition</p>
-        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:0.4em; color:rgba(201,168,76,0.4); text-transform:uppercase;">Japanese Sword &amp; Art</p>
       </div>
       <div class="about-text reveal">
         <!-- JA -->
         <p class="section-label" data-lang="ja">About Us</p>
         <h2 class="section-title" data-lang="ja">会社概要</h2>
         <div class="gold-rule"></div>
-        <p data-lang="ja">凱業株式会社（英文名：KSWORD）は、日本刀・調理用刃物の製造・輸出を専門とする企業です。日本国内での豊富な実績を基に、中国・欧米市場への輸出事業を展開しております。</p>
-        <p data-lang="ja">当社は、日本伝統の職人技術と現代の品質管理を融合させ、世界中のお客様に最高品質の刃物製品をお届けすることをミッションとしています。</p>
-        <p data-lang="ja">関連会社として中国国内でも同様の事業を展開しており（国内サイト：<span style="color:var(--gold)">www.k-sword.com</span>）、グローバルネットワークを通じたサービス提供を実現しています。</p>
-        <!-- ZH -->
-        <p class="section-label" data-lang="zh">About Us</p>
-        <h2 class="section-title" data-lang="zh">关于我们</h2>
-        <div class="gold-rule" data-lang="zh"></div>
-        <p data-lang="zh">凯业株式会社（英文名：KSWORD）是一家专注于日本刀具制造与出口的企业，总部设于日本。基于在中国市场的丰富经验，我们积极拓展面向中国及欧美市场的出口业务。</p>
-        <p data-lang="zh">公司融合日本传统工艺与现代品质管理体系，致力于向全球客户提供最高品质的刀具产品。</p>
-        <p data-lang="zh">我们在中国设有关联公司（国内官网：<span style="color:var(--gold)">www.k-sword.com</span>），通过全球化网络为客户提供优质服务。</p>
+        <p data-lang="ja">凱業株式会社（英文名：KSWORD）は、大阪を拠点に、日本刀・刀剣類、鍔・刀装具、刃物類を取り扱う会社です。</p>
+        <p data-lang="ja">一点ごとの来歴や状態を尊重し、確認と記録を丁寧に行うことを基本姿勢としています。日本の刀剣文化と職人の技に敬意を払い、安心してご相談いただける取引を積み重ねてまいります。</p>
+        <p data-lang="ja">古物営業法をはじめとする関係法令を遵守し、適正な事業運営に努めています。</p>
         <!-- EN -->
         <p class="section-label" data-lang="en">About Us</p>
         <h2 class="section-title" data-lang="en">About KSWORD</h2>
         <div class="gold-rule" data-lang="en"></div>
-        <p data-lang="en">KSWORD (Kaigyou Co., Ltd.) is a Japan-based company specializing in the manufacturing and export of Japanese blades and cutlery. Drawing on extensive experience in both domestic and international markets, we serve customers across China, Europe, and the Americas.</p>
-        <p data-lang="en">Our mission is to deliver the finest quality blade products by combining Japan's traditional craftsmanship with modern quality management standards.</p>
-        <p data-lang="en">Our affiliated company in China (<span style="color:var(--gold)">www.k-sword.com</span>) extends our global network, ensuring seamless service to our clients worldwide.</p>
+        <p data-lang="en">KSWORD (Kaigyou Co., Ltd.) is an Osaka-based company handling Japanese swords, fittings, and cutlery.</p>
+        <p data-lang="en">We respect the provenance and condition of every item, with careful verification and recordkeeping at the heart of our work. Our aim is to provide dependable, considered service grounded in respect for Japanese sword culture and craftsmanship.</p>
+        <p data-lang="en">We conduct our business responsibly and in accordance with Japan's Secondhand Articles Dealer Act and other applicable laws.</p>
       </div>
     </div>
   </div>
@@ -677,42 +681,34 @@
   <div class="container">
     <div class="reveal">
       <p class="section-label" data-lang="ja">Our Business</p>
-      <p class="section-label" data-lang="zh">Our Business</p>
       <p class="section-label" data-lang="en">Our Business</p>
       <h2 class="section-title" data-lang="ja">事業内容</h2>
-      <h2 class="section-title" data-lang="zh">业务范围</h2>
       <h2 class="section-title" data-lang="en">What We Do</h2>
     </div>
     <div class="business-grid">
       <div class="biz-card reveal">
         <div class="biz-num">01</div>
         <span class="biz-icon">⚔</span>
-        <div class="biz-title" data-lang="ja">日本刀・刃物の製造</div>
-        <div class="biz-title" data-lang="zh">日本刀具制造</div>
-        <div class="biz-title" data-lang="en">Blade Manufacturing</div>
-        <div class="biz-desc" data-lang="ja">伝統的な製法による日本刀・包丁・各種刃物の製造。職人による手仕上げと最新の品質管理を組み合わせた高品質製品を提供します。</div>
-        <div class="biz-desc" data-lang="zh">采用传统工艺制造日本刀、厨刀及各类刃物，融合匠人手工精制与现代品质管控，提供高品质产品。</div>
-        <div class="biz-desc" data-lang="en">Manufacturing of Japanese swords, kitchen knives, and specialty blades using traditional techniques combined with modern quality control systems.</div>
+        <div class="biz-title" data-lang="ja">日本刀・刀剣類の取扱い</div>
+        <div class="biz-title" data-lang="en">Japanese Swords</div>
+        <div class="biz-desc" data-lang="ja">日本刀・刀剣類について、登録証その他の必要事項を確認のうえ、関係法令に基づき適正に取り扱います。</div>
+        <div class="biz-desc" data-lang="en">Japanese swords are handled responsibly after confirming registration certificates and other required documentation.</div>
       </div>
       <div class="biz-card reveal">
         <div class="biz-num">02</div>
-        <span class="biz-icon">🌏</span>
-        <div class="biz-title" data-lang="ja">海外輸出事業</div>
-        <div class="biz-title" data-lang="zh">海外出口业务</div>
-        <div class="biz-title" data-lang="en">International Export</div>
-        <div class="biz-desc" data-lang="ja">中国・欧米を主要市場として、日本製刃物の輸出を行います。各国の輸入規制・法令に対応したコンプライアンス体制を整備しています。</div>
-        <div class="biz-desc" data-lang="zh">以中国、欧洲及美洲为主要市场，开展日本刀具出口业务，并建立完善的合规体系，符合各目标市场法规要求。</div>
-        <div class="biz-desc" data-lang="en">Export operations focused on China, Europe, and the Americas, with full compliance frameworks established for each target market's import regulations.</div>
+        <span class="biz-icon">◇</span>
+        <div class="biz-title" data-lang="ja">鍔・刀装具の取扱い</div>
+        <div class="biz-title" data-lang="en">Tsuba &amp; Sword Fittings</div>
+        <div class="biz-desc" data-lang="ja">鍔、縁頭、目貫をはじめとする刀装具について、品物の状態や付属資料を確認しながら丁寧にご案内します。</div>
+        <div class="biz-desc" data-lang="en">We offer tsuba and other sword fittings with careful attention to each item's condition and accompanying documentation.</div>
       </div>
       <div class="biz-card reveal">
         <div class="biz-num">03</div>
         <span class="biz-icon">🤝</span>
-        <div class="biz-title" data-lang="ja">OEM・卸売事業</div>
-        <div class="biz-title" data-lang="zh">OEM及批发业务</div>
-        <div class="biz-title" data-lang="en">OEM & Wholesale</div>
-        <div class="biz-desc" data-lang="ja">海外バイヤー・ブランド向けにOEM製造・卸売サービスを提供します。ブランドロゴ入り製品や特注仕様への対応も可能です。</div>
-        <div class="biz-desc" data-lang="zh">面向海外买家及品牌提供OEM代工及批发服务，支持品牌定制刻印及特殊规格订制。</div>
-        <div class="biz-desc" data-lang="en">OEM manufacturing and wholesale services for international buyers and brands, including custom branding and special specifications.</div>
+        <div class="biz-title" data-lang="ja">販売・商品に関するご相談</div>
+        <div class="biz-title" data-lang="en">Sales &amp; Product Enquiries</div>
+        <div class="biz-desc" data-lang="ja">刀剣類・刀装具・刃物類について、品物の内容や状態を確認し、ご要望に応じて分かりやすくご案内します。</div>
+        <div class="biz-desc" data-lang="en">We provide clear, considered guidance on swords, fittings, and cutlery based on the details and condition of each item.</div>
       </div>
     </div>
   </div>
@@ -723,10 +719,8 @@
   <div class="container">
     <div class="reveal">
       <p class="section-label" data-lang="ja">Products</p>
-      <p class="section-label" data-lang="zh">Products</p>
       <p class="section-label" data-lang="en">Products</p>
       <h2 class="section-title" data-lang="ja">製品ラインナップ</h2>
-      <h2 class="section-title" data-lang="zh">产品系列</h2>
       <h2 class="section-title" data-lang="en">Our Products</h2>
       <div class="gold-rule"></div>
     </div>
@@ -736,11 +730,9 @@
         <div class="product-card-overlay">
           <div class="product-card-num">01</div>
           <div class="product-card-name" data-lang="ja">日本刀・刀剣</div>
-          <div class="product-card-name" data-lang="zh">日本刀・刀剑</div>
-          <div class="product-card-name" data-lang="en">Katana & Swords</div>
-          <div class="product-card-desc" data-lang="ja">伝統製法による本格日本刀</div>
-          <div class="product-card-desc" data-lang="zh">采用传统工艺制作的正宗日本刀</div>
-          <div class="product-card-desc" data-lang="en">Authentic blades by traditional craft</div>
+          <div class="product-card-name" data-lang="en">Katana &amp; Swords</div>
+          <div class="product-card-desc" data-lang="ja">登録証等を確認のうえ取り扱う日本刀・刀剣類</div>
+          <div class="product-card-desc" data-lang="en">Japanese swords handled after registration checks</div>
         </div>
       </div>
       <div class="product-card reveal">
@@ -748,11 +740,9 @@
         <div class="product-card-overlay">
           <div class="product-card-num">02</div>
           <div class="product-card-name" data-lang="ja">太刀・打刀</div>
-          <div class="product-card-name" data-lang="zh">太刀·打刀</div>
-          <div class="product-card-name" data-lang="en">Tachi & Uchigatana</div>
-          <div class="product-card-desc" data-lang="ja">各流派に対応した刀剣コレクション</div>
-          <div class="product-card-desc" data-lang="zh">对应各流派的刀剑典藏系列</div>
-          <div class="product-card-desc" data-lang="en">Curated collection across sword traditions</div>
+          <div class="product-card-name" data-lang="en">Tachi &amp; Uchigatana</div>
+          <div class="product-card-desc" data-lang="ja">太刀・打刀など、各種刀剣類</div>
+          <div class="product-card-desc" data-lang="en">Tachi, uchigatana, and other sword types</div>
         </div>
       </div>
       <div class="product-card reveal">
@@ -760,95 +750,71 @@
         <div class="product-card-overlay">
           <div class="product-card-num">03</div>
           <div class="product-card-name" data-lang="ja">鍔・刀装具</div>
-          <div class="product-card-name" data-lang="zh">鍔·刀装具</div>
-          <div class="product-card-name" data-lang="en">Tsuba & Fittings</div>
-          <div class="product-card-desc" data-lang="ja">匠の技が光る鍔・各種刀装具</div>
-          <div class="product-card-desc" data-lang="zh">彰显匠心工艺的鍔及各式刀装具</div>
-          <div class="product-card-desc" data-lang="en">Artisan-crafted guards and sword fittings</div>
+          <div class="product-card-name" data-lang="en">Tsuba &amp; Fittings</div>
+          <div class="product-card-desc" data-lang="ja">鍔・縁頭・目貫などの刀装具</div>
+          <div class="product-card-desc" data-lang="en">Tsuba, fuchigashira, menuki, and fittings</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ MARKET ══ -->
+<!-- ══ STANDARDS ══ -->
 <section class="market-section" id="market">
   <div class="container">
     <div class="market-inner">
       <div class="reveal">
-        <p class="section-label" data-lang="ja">Global Reach</p>
-        <p class="section-label" data-lang="zh">Global Reach</p>
-        <p class="section-label" data-lang="en">Global Reach</p>
-        <h2 class="section-title" data-lang="ja">主要輸出市場</h2>
-        <h2 class="section-title" data-lang="zh">主要出口市场</h2>
-        <h2 class="section-title" data-lang="en">Key Export Markets</h2>
+        <p class="section-label" data-lang="ja">Our Standards</p>
+        <p class="section-label" data-lang="en">Our Standards</p>
+        <h2 class="section-title" data-lang="ja">安心への取組み</h2>
+        <h2 class="section-title" data-lang="en">Responsible Practice</h2>
         <div class="gold-rule"></div>
-        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="ja">日本国内のネットワークを基盤に、中国・欧州・北米へのグローバル展開を積極推進しています。</p>
-        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="zh">依托日本国内网络，积极推进面向中国、欧洲及北美的全球化布局。</p>
-        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="en">Leveraging our domestic Japanese network, we actively expand our global footprint across China, Europe, and North America.</p>
+        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="ja">大阪を拠点に、一点一点の品物と誠実に向き合い、確認できた内容を分かりやすくお伝えすることを大切にしています。</p>
+        <p style="font-size:14px; line-height:2; color:rgba(245,240,232,0.7); font-family:'Noto Sans JP',sans-serif; font-weight:300;" data-lang="en">Based in Osaka, we approach every item with care and communicate verified information as clearly as possible.</p>
         <div class="market-stats">
           <div class="stat-row">
-            <span class="stat-flag">🇯🇵</span>
-            <span class="stat-region" data-lang="ja">日本（国内）</span>
-            <span class="stat-region" data-lang="zh">日本（国内）</span>
-            <span class="stat-region" data-lang="en">Japan (Domestic)</span>
-            <div class="stat-bar-wrap"><div class="stat-bar" style="width:85%"></div></div>
-            <span class="stat-pct">85%</span>
+            <span class="stat-flag">一</span>
+            <span class="stat-region" data-lang="ja">品物の確認</span>
+            <span class="stat-region" data-lang="en">Item Review</span>
+            <div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div>
           </div>
           <div class="stat-row">
-            <span class="stat-flag">🇨🇳</span>
-            <span class="stat-region" data-lang="ja">中国</span>
-            <span class="stat-region" data-lang="zh">中国</span>
-            <span class="stat-region" data-lang="en">China</span>
-            <div class="stat-bar-wrap"><div class="stat-bar" style="width:70%"></div></div>
-            <span class="stat-pct">70%</span>
+            <span class="stat-flag">二</span>
+            <span class="stat-region" data-lang="ja">必要事項の記録</span>
+            <span class="stat-region" data-lang="en">Recordkeeping</span>
+            <div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div>
           </div>
           <div class="stat-row">
-            <span class="stat-flag">🇪🇺</span>
-            <span class="stat-region" data-lang="ja">欧州</span>
-            <span class="stat-region" data-lang="zh">欧洲</span>
-            <span class="stat-region" data-lang="en">Europe</span>
-            <div class="stat-bar-wrap"><div class="stat-bar" style="width:55%"></div></div>
-            <span class="stat-pct">55%</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-flag">🇺🇸</span>
-            <span class="stat-region" data-lang="ja">北米</span>
-            <span class="stat-region" data-lang="zh">北美</span>
-            <span class="stat-region" data-lang="en">North America</span>
-            <div class="stat-bar-wrap"><div class="stat-bar" style="width:45%"></div></div>
-            <span class="stat-pct">45%</span>
+            <span class="stat-flag">三</span>
+            <span class="stat-region" data-lang="ja">分かりやすいご案内</span>
+            <span class="stat-region" data-lang="en">Clear Guidance</span>
+            <div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div>
           </div>
         </div>
       </div>
       <div class="market-map-box reveal">
-        <p class="map-title" data-lang="ja">グローバルネットワーク</p>
-        <p class="map-title" data-lang="zh">全球业务网络</p>
-        <p class="map-title" data-lang="en">Global Network</p>
+        <p class="map-title" data-lang="ja">適正な古物取引のために</p>
+        <p class="map-title" data-lang="en">For Responsible Transactions</p>
         <div class="globe-art">
           <div class="globe-item">
-            <div class="globe-flag">🇯🇵</div>
-            <div class="globe-name" data-lang="ja">日本<br>本社</div>
-            <div class="globe-name" data-lang="zh">日本<br>总部</div>
-            <div class="globe-name" data-lang="en">Japan<br>HQ</div>
+            <div class="globe-flag">鑑</div>
+            <div class="globe-name" data-lang="ja">状態・資料<br>の確認</div>
+            <div class="globe-name" data-lang="en">Condition<br>& Documents</div>
           </div>
           <div class="globe-item">
-            <div class="globe-flag">🇨🇳</div>
-            <div class="globe-name" data-lang="ja">中国<br>関連会社</div>
-            <div class="globe-name" data-lang="zh">中国<br>关联公司</div>
-            <div class="globe-name" data-lang="en">China<br>Affiliate</div>
+            <div class="globe-flag">記</div>
+            <div class="globe-name" data-lang="ja">本人確認<br>・取引記録</div>
+            <div class="globe-name" data-lang="en">Identity<br>& Records</div>
           </div>
           <div class="globe-item">
-            <div class="globe-flag">🌍</div>
-            <div class="globe-name" data-lang="ja">欧米<br>輸出先</div>
-            <div class="globe-name" data-lang="zh">欧美<br>出口目的地</div>
-            <div class="globe-name" data-lang="en">Europe<br>& Americas</div>
+            <div class="globe-flag">法</div>
+            <div class="globe-name" data-lang="ja">関係法令<br>の遵守</div>
+            <div class="globe-name" data-lang="en">Legal<br>Compliance</div>
           </div>
         </div>
         <div style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(201,168,76,0.15);">
-          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="ja">中国国内サイト：<a href="http://www.k-sword.com" style="color:var(--gold); text-decoration:none;" target="_blank">www.k-sword.com</a></p>
-          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="zh">中国国内官网：<a href="http://www.k-sword.com" style="color:var(--gold); text-decoration:none;" target="_blank">www.k-sword.com</a></p>
-          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="en">China Affiliate Site: <a href="http://www.k-sword.com" style="color:var(--gold); text-decoration:none;" target="_blank">www.k-sword.com</a></p>
+          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="ja">古物営業法その他の関係法令に基づき、必要な確認と記録を行います。</p>
+          <p style="font-size:12px; color:var(--mist); font-family:'Noto Sans JP',sans-serif; font-weight:300; line-height:1.8;" data-lang="en">Required checks and records are maintained in accordance with applicable Japanese laws.</p>
         </div>
       </div>
     </div>
@@ -861,76 +827,53 @@
     <div class="info-inner">
       <div class="reveal">
         <p class="section-label" data-lang="ja">Company Profile</p>
-        <p class="section-label" data-lang="zh">Company Profile</p>
         <p class="section-label" data-lang="en">Company Profile</p>
         <h2 class="section-title" data-lang="ja">会社情報</h2>
-        <h2 class="section-title" data-lang="zh">公司信息</h2>
         <h2 class="section-title" data-lang="en">Company Information</h2>
 
         <!-- JA Table -->
         <table class="info-table" data-lang="ja">
           <tr><th>会社名</th><td>凱業株式会社</td></tr>
-          <tr><th>英文名</th><td>KSWORD Co., Ltd.</td></tr>
+          <tr><th>ブランド名</th><td>KSWORD</td></tr>
           <tr><th>設立</th><td>2025年9月4日（令和7年9月4日）</td></tr>
           <tr><th>所在地</th><td>大阪府大阪市東淀川区大桐三丁目10番18号－303号</td></tr>
           <tr><th>代表者</th><td>戴娴婷</td></tr>
           <tr><th>資本金</th><td>金500万円</td></tr>
-          <tr><th>事業内容</th><td>日本刀・刃物の製造、販売及び輸出入</td></tr>
-          <tr><th>取引銀行</th><td>GMOあおぞらネット銀行 他</td></tr>
-          <tr><th>国内関連</th><td>www.k-sword.com（中国）</td></tr>
-        </table>
-
-        <!-- ZH Table -->
-        <table class="info-table" data-lang="zh">
-          <tr><th>公司名称</th><td>凯业株式会社</td></tr>
-          <tr><th>英文名称</th><td>KSWORD Co., Ltd.</td></tr>
-          <tr><th>成立时间</th><td>2025年9月4日（令和7年9月4日）</td></tr>
-          <tr><th>地址</th><td>大阪府大阪市东淀川区大桐三丁目10番18号－303号</td></tr>
-          <tr><th>代表人</th><td>戴娴婷</td></tr>
-          <tr><th>注册资本</th><td>500万日元</td></tr>
-          <tr><th>主营业务</th><td>日本刀具的制造、销售及进出口</td></tr>
-          <tr><th>开户银行</th><td>GMO青空网络银行 等</td></tr>
-          <tr><th>关联公司</th><td>www.k-sword.com（中国）</td></tr>
+          <tr><th>事業内容</th><td>日本刀・刀剣類、刀装具、刃物類等の販売及び取扱い</td></tr>
+          <tr><th>古物商許可</th><td>大阪府公安委員会 第62116R083691号</td></tr>
         </table>
 
         <!-- EN Table -->
         <table class="info-table" data-lang="en">
-          <tr><th>Company</th><td>Kaigyou Co., Ltd. (KSWORD)</td></tr>
-          <tr><th>English Name</th><td>KSWORD Co., Ltd.</td></tr>
+          <tr><th>Company</th><td>Kaigyou Co., Ltd.</td></tr>
+          <tr><th>Brand</th><td>KSWORD</td></tr>
           <tr><th>Founded</th><td>September 4, 2025</td></tr>
-          <tr><th>Address</th><td>303, 10-18 Okigiri 3-chome, Higashiyodogawa-ku, Osaka</td></tr>
+          <tr><th>Address</th><td>303, 3-10-18 Daido, Higashiyodogawa-ku, Osaka</td></tr>
           <tr><th>CEO</th><td>Dai Xianting</td></tr>
           <tr><th>Capital</th><td>JPY 5,000,000</td></tr>
-          <tr><th>Business</th><td>Manufacturing, sales, import/export of Japanese blades & cutlery</td></tr>
-          <tr><th>Bank</th><td>GMO Aozora Net Bank, et al.</td></tr>
-          <tr><th>Affiliate</th><td>www.k-sword.com (China)</td></tr>
+          <tr><th>Business</th><td>Sales and handling of Japanese swords, fittings, cutlery, and related items</td></tr>
+          <tr><th>License</th><td>Osaka Prefectural Public Safety Commission No. 62116R083691</td></tr>
         </table>
       </div>
 
       <div class="info-aside reveal">
         <div class="info-card">
           <div class="info-card-title" data-lang="ja">品質へのこだわり</div>
-          <div class="info-card-title" data-lang="zh">品质承诺</div>
           <div class="info-card-title" data-lang="en">Quality Commitment</div>
-          <div class="info-card-body" data-lang="ja">当社は原材料の選定から最終検査まで、すべての工程において厳格な品質基準を設けています。日本伝統の刃物文化を継承しながら、国際基準に対応した製品を提供しています。</div>
-          <div class="info-card-body" data-lang="zh">从原材料筛选到最终检验，公司在每道工序均设有严格的品质标准。在传承日本传统刀具文化的同时，提供符合国际标准的高品质产品。</div>
-          <div class="info-card-body" data-lang="en">From raw material selection to final inspection, we maintain rigorous quality standards at every stage of production, delivering products that meet international quality benchmarks.</div>
+          <div class="info-card-body" data-lang="ja">品物の状態や付属資料を確認し、確認できた内容をできる限り分かりやすくお伝えします。一点一点に丁寧に向き合うことを大切にしています。</div>
+          <div class="info-card-body" data-lang="en">We review each item's condition and accompanying documentation, communicating verified details as clearly as possible.</div>
         </div>
         <div class="info-card">
           <div class="info-card-title" data-lang="ja">コンプライアンス</div>
-          <div class="info-card-title" data-lang="zh">合规经营</div>
           <div class="info-card-title" data-lang="en">Compliance</div>
-          <div class="info-card-body" data-lang="ja">日本国内法令はもとより、輸出先国の関係法令・規制を遵守した適正な事業運営を行っています。刃物類の輸出に関する国際規制への対応も徹底しています。</div>
-          <div class="info-card-body" data-lang="zh">公司严格遵守日本国内法律法规及出口目的国的相关法规，合法合规开展业务，切实落实刀具类产品出口的国际规制要求。</div>
-          <div class="info-card-body" data-lang="en">We strictly comply with Japanese domestic laws and the regulations of our export markets, with thorough adherence to international regulations governing blade exports.</div>
+          <div class="info-card-body" data-lang="ja">古物営業法をはじめとする関係法令を遵守し、適正な事業運営に努めています。刀剣類は、登録証その他の必要事項を確認のうえ取り扱います。</div>
+          <div class="info-card-body" data-lang="en">We comply with Japan's Secondhand Articles Dealer Act and other applicable laws. Registration and required documentation are confirmed when handling swords.</div>
         </div>
         <div class="info-card">
-          <div class="info-card-title" data-lang="ja">グローバルビジョン</div>
-          <div class="info-card-title" data-lang="zh">全球化愿景</div>
-          <div class="info-card-title" data-lang="en">Global Vision</div>
-          <div class="info-card-body" data-lang="ja">「日本の刃物文化を世界へ」をビジョンに掲げ、高品質な日本製刃物を通じて、世界中の食文化・伝統文化に貢献してまいります。</div>
-          <div class="info-card-body" data-lang="zh">以"将日本刀具文化带向世界"为愿景，通过高品质日本刀具，为全球饮食文化与传统文化作出贡献。</div>
-          <div class="info-card-body" data-lang="en">Our vision is to bring Japanese blade culture to the world — contributing to global culinary and traditional culture through premium Japanese craftsmanship.</div>
+          <div class="info-card-title" data-lang="ja">地域に根ざした事業</div>
+          <div class="info-card-title" data-lang="en">Based in Osaka</div>
+          <div class="info-card-body" data-lang="ja">大阪を拠点に、安心してご相談いただける会社を目指し、誠実で丁寧な対応を積み重ねてまいります。</div>
+          <div class="info-card-body" data-lang="en">From our base in Osaka, we work to build lasting trust through sincere and attentive service.</div>
         </div>
       </div>
     </div>
@@ -943,15 +886,12 @@
     <div class="contact-inner">
       <div class="reveal">
         <p class="section-label" data-lang="ja">Contact</p>
-        <p class="section-label" data-lang="zh">Contact</p>
         <p class="section-label" data-lang="en">Contact</p>
         <h2 class="section-title" data-lang="ja">お問い合わせ</h2>
-        <h2 class="section-title" data-lang="zh">联系我们</h2>
         <h2 class="section-title" data-lang="en">Get In Touch</h2>
         <div class="gold-rule"></div>
-        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="ja">製品に関するお問い合わせ、OEM・卸売のご相談、その他ご質問はお気軽にご連絡ください。</p>
-        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="zh">如有产品咨询、OEM及批发合作意向，或其他问题，欢迎随时联系我们。</p>
-        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="en">Feel free to contact us for product inquiries, OEM and wholesale partnerships, or any other questions.</p>
+        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="ja">商品に関するお問い合わせ、刀剣類・刀装具の取扱いに関するご相談は、メールフォームよりご連絡ください。</p>
+        <p style="font-size:14px;line-height:2;color:rgba(245,240,232,0.7);font-family:'Noto Sans JP',sans-serif;font-weight:300;" data-lang="en">Please use the enquiry form for questions about our products or the handling of swords and fittings.</p>
         <div class="contact-links">
           <div class="contact-item">
             <span class="contact-item-icon">✉</span>
@@ -961,23 +901,12 @@
             </div>
           </div>
           <div class="contact-item">
-            <span class="contact-item-icon">🌐</span>
-            <div>
-              <div class="contact-item-label" data-lang="ja">中国国内サイト</div>
-              <div class="contact-item-label" data-lang="zh">中国国内官网</div>
-              <div class="contact-item-label" data-lang="en">China Affiliate</div>
-              <div class="contact-item-val"><a href="http://www.k-sword.com" target="_blank">www.k-sword.com</a></div>
-            </div>
-          </div>
-          <div class="contact-item">
             <span class="contact-item-icon">📍</span>
             <div>
               <div class="contact-item-label" data-lang="ja">所在地</div>
-              <div class="contact-item-label" data-lang="zh">地址</div>
               <div class="contact-item-label" data-lang="en">Address</div>
               <div class="contact-item-val" data-lang="ja">大阪府大阪市東淀川区大桐三丁目10番18号－303号</div>
-              <div class="contact-item-val" data-lang="zh">大阪府大阪市东淀川区大桐三丁目10番18号－303号</div>
-              <div class="contact-item-val" data-lang="en">303, 10-18 Okigiri 3-chome, Higashiyodogawa-ku, Osaka</div>
+              <div class="contact-item-val" data-lang="en">303, 3-10-18 Daido, Higashiyodogawa-ku, Osaka</div>
             </div>
           </div>
         </div>
@@ -985,35 +914,29 @@
       <div class="reveal">
         <p class="section-label" style="visibility:hidden;">spacer</p>
         <h2 class="section-title" data-lang="ja">メッセージを送る</h2>
-        <h2 class="section-title" data-lang="zh">发送消息</h2>
         <h2 class="section-title" data-lang="en">Send a Message</h2>
         <div class="contact-form">
           <div class="form-group">
             <label class="form-label" data-lang="ja">お名前</label>
-            <label class="form-label" data-lang="zh">姓名</label>
             <label class="form-label" data-lang="en">Name</label>
             <input class="form-input" type="text">
           </div>
           <div class="form-group">
             <label class="form-label" data-lang="ja">メールアドレス</label>
-            <label class="form-label" data-lang="zh">电子邮箱</label>
             <label class="form-label" data-lang="en">Email</label>
             <input class="form-input" type="email">
           </div>
           <div class="form-group">
             <label class="form-label" data-lang="ja">件名</label>
-            <label class="form-label" data-lang="zh">主题</label>
             <label class="form-label" data-lang="en">Subject</label>
             <input class="form-input" type="text">
           </div>
           <div class="form-group">
             <label class="form-label" data-lang="ja">メッセージ</label>
-            <label class="form-label" data-lang="zh">消息内容</label>
             <label class="form-label" data-lang="en">Message</label>
             <textarea class="form-textarea"></textarea>
           </div>
           <button class="btn-submit" data-lang="ja">送信する</button>
-          <button class="btn-submit" data-lang="zh">发送</button>
           <button class="btn-submit" data-lang="en">Send Message</button>
         </div>
       </div>
@@ -1025,19 +948,17 @@
 <footer>
   <div class="footer-logo">KSWORD</div>
   <div class="footer-copy">
-    <span data-lang="ja">© 2025 凱業株式会社 All Rights Reserved.</span>
-    <span data-lang="zh">© 2025 凯业株式会社 版权所有</span>
-    <span data-lang="en">© 2025 Kaigyou Co., Ltd. (KSWORD) All Rights Reserved.</span>
+    <span data-lang="ja">© 2026 凱業株式会社 All Rights Reserved.</span>
+    <span data-lang="en">© 2026 Kaigyou Co., Ltd. (KSWORD) All Rights Reserved.</span>
+    <span data-lang="ja">古物商許可：大阪府公安委員会 第62116R083691号</span>
+    <span data-lang="en">Secondhand Dealer License: Osaka Prefectural Public Safety Commission No. 62116R083691</span>
   </div>
   <div class="footer-links">
     <a href="#about" data-lang="ja">会社概要</a>
-    <a href="#about" data-lang="zh">关于我们</a>
     <a href="#about" data-lang="en">About</a>
     <a href="#business" data-lang="ja">事業内容</a>
-    <a href="#business" data-lang="zh">业务</a>
     <a href="#business" data-lang="en">Business</a>
     <a href="#contact" data-lang="ja">お問い合わせ</a>
-    <a href="#contact" data-lang="zh">联系</a>
     <a href="#contact" data-lang="en">Contact</a>
   </div>
 </footer>
@@ -1048,14 +969,14 @@
     document.body.className = 'lang-' + lang;
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang-btn').forEach((btn, i) => {
-      btn.classList.toggle('active', ['ja','zh','en'][i] === lang);
+      btn.classList.toggle('active', ['ja','en'][i] === lang);
     });
     localStorage.setItem('ksword-lang', lang);
   }
 
   // Restore language preference
   const saved = localStorage.getItem('ksword-lang');
-  if (saved) setLang(saved);
+  if (saved === 'ja' || saved === 'en') setLang(saved);
 
   // Sticky header
   const header = document.getElementById('header');
